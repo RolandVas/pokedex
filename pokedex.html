@@ -16,11 +16,21 @@
 
 
     <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
+        <div id="navbar" class="container-fluid">
             <a class="navbar-brand">Pokedex</a>
-            <div class="d-flex">
-                <input id="search" onkeyup="searchPokemon()" class="form-control me-2" type="search" placeholder="Search Pokemon" aria-label="Search">
+
+            <div class="filter" id="filterBox">
             </div>
+
+            <div class="d-flex">
+                <input id="search" onkeyup="searchPokemon()" class="form-control me-2" type="search"
+                    placeholder="Search Pokemon" aria-label="Search">
+            </div>
+            
+            <div class="form-check form-switch">
+                <input onclick="darkmode()" class="form-check-input" name="accept" type="checkbox" id="accept">
+                <label class="form-check-label" for="accept">Darkmode</label>
+              </div>
         </div>
     </nav>
 
@@ -56,7 +66,7 @@
                 <img id="pokedexCardImg" src="" alt="">
             </div>
 
-            <div class="Pokemon-card-bottom">
+            <div id="PokemonCardBottom" class="Pokemon-card-bottom">
 
                 <div class="table-nav">
                     <span onclick="showAbout()" id="aboutNav" class="table-nav-m">About</span>
@@ -93,8 +103,9 @@
                                 <td id="HP"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="HPBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="HPBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -102,8 +113,9 @@
                                 <td id="attack"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="attackBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="attackBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -111,8 +123,9 @@
                                 <td id="defense"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="defenseBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="defenseBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -120,8 +133,9 @@
                                 <td id="spec-atk"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="specAtkBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="specAtkBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -129,8 +143,9 @@
                                 <td id="spec-def"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="specDefBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="specDefBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -138,8 +153,9 @@
                                 <td id="speed"></td>
                                 <td id="">
                                     <div class="progress">
-                                        <div id="speedBar" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
+                                        <div id="speedBar" class="progress-bar" role="progressbar" style="width: 25%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </td>
                             </tr>
                         </table>

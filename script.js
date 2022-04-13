@@ -1,8 +1,6 @@
 let Pokemon;
 let Pokemon2;
 
-
-
 let colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
@@ -17,11 +15,15 @@ let colors = {
     psychic: '#eaeda1',
     flying: '#F5F5F5',
     fighting: '#E6E0D4',
-    normal: '#F5F5F5'
+    normal: '#F5F5F5',
+    ghost: '#ADADAD'
 };
 
+let type = ['fire', 'grass', 'electric', 'water', 'ground', 'rock', 'fairy', 'poison', 'bug', 'dragon', 'psychic', 'flying', 'fighting', 'normal', 'ghost']
 
-let pokemon_number = 10;
+
+let pokemon_number = 101;
+
 
 
 /* Werte von renderAllPokemonInfoForCard */
@@ -45,7 +47,7 @@ let AllSpeed = [];
 
 
 async function loadPokedex() {
-
+    checkbox()
     for (let i = 1; i < pokemon_number; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
@@ -60,7 +62,7 @@ async function loadPokedex() {
         renderAllPokemonCardMini(i) /* rendert alle daten für die kleine Pokemon Karte // div ist im JavaScript definiert */
         renderAllPokemonInfoForCard() /* rendert alle daten für die grosse Pokemon Karte // div ist im HTML teil definiert */
         renderAllPokemonStatForcard()
-
+        
 
 
     }
@@ -83,7 +85,7 @@ function renderAllPokemonCardMini(i) {
         <div>
             <div class="pokemon-number">#${i}</div>
             <div id="pokemonNameMini${i}" class="pokemon-card-name-mini">${name}</div>
-            <span class="pokemon-card-type">${type}</span>
+            <span id="pokemonTypeMini${i}" class="pokemon-card-type">${type}</span>
         </div>
         <div class="pokemon-card-img-mini">
             <img id="pokedexCardImgMini" src="${img}" alt="">
@@ -277,7 +279,67 @@ function showStats() {
 }
 
 
+function darkmode() {
+    const dark = document.getElementById('accept');
 
+    if (dark.checked) {
+        document.body.style.backgroundColor = "#3d3d3d";
+        document.getElementById('navbar').classList.add('darkmode-nav')
+        document.getElementById('PokemonCardBottom').classList.add('darkmodeCard')
+    } else {
+        document.body.style.backgroundColor = "";
+        document.getElementById('navbar').classList.remove('darkmode-nav')
+        document.getElementById('PokemonCardBottom').classList.remove('darkmodeCard')
+    }
+}
+
+function checkbox() {
+    for (let i = 0; i < type.length; i++) {
+        const pokemonType = type[i];
+
+        document.getElementById('filterBox').innerHTML += `
+            <div class="filterBox">
+                <input class="input_filterBox" onclick="filterPokemon('${pokemonType}')" type="checkbox" id="checkbox-${pokemonType}" value="${pokemonType}">
+                <label class="label" for="checkbox-${pokemonType}">${pokemonType}</label>
+            </div>
+        `;
+    }
+}
+
+
+
+
+let typeOR = "fire"||"grass"||"electric";
+let allCheckbox = [];
+
+function filterPokemon(type) {
+
+    let checkbox = document.getElementById(`checkbox-${type}`);
+    let checkboxValue = document.getElementById(`checkbox-${type}`).value;
+    console.log(checkboxValue)
+
+    let checkboxs = document.getElementsByClassName('input_filterBox');
+    
+    allCheckbox.push(checkboxs)
+    
+
+
+    for (let i = 1; i < pokemon_number; i++) {
+
+        let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
+        let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
+        
+       
+       
+        if (!checkboxs.checked) {
+            pokemonCardElement.classList.remove('d-none')
+        } else { (checkbox.checked && pokemonType != checkboxValue)  
+            pokemonCardElement.classList.add('d-none')
+        }
+
+    }
+
+}
 
 function searchPokemon() {
 
@@ -285,7 +347,8 @@ function searchPokemon() {
     console.log(input)
 
 
-    for (let i = 1; i < 10; i++) {
+
+    for (let i = 1; i < pokemon_number; i++) {
 
         let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
         console.log(pokemonCardElement)
@@ -295,11 +358,12 @@ function searchPokemon() {
 
         if (!pokemonCardName.includes(input)) {
             pokemonCardElement.classList.add('d-none');
-        } else {
-            if (pokemonCardElement.classList.contains('d-none')){
+        }
+        else {
+            if (pokemonCardElement.classList.contains('d-none')) {
                 pokemonCardElement.classList.remove('d-none');
             }
-            
+
         }
     }
 
@@ -307,7 +371,11 @@ function searchPokemon() {
 
 
 
-/* `${AllName[i]}` */
+// let darkmode = document.getElementById('darkmode');
+
+// if (darkmode.checked = true) {
+//     document.getElementById('allPokemon').classList.add('darkmode')
+// }
 
 
 
@@ -315,6 +383,16 @@ function searchPokemon() {
 
 
 
+
+// if (checkbox.checked && pokemonType != checkboxValue) {
+        //     pokemonCardElement.classList.add('d-none')
+        // } else (pokemonCardElement.classList.remove('d-none'))
+
+
+
+ // if (checkbox.checked){
+    //     allCheckbox.push(`checkbox-${type}`)
+    // } else (allCheckbox.splice (0, 1))
 
 
 
