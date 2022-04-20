@@ -1,5 +1,6 @@
 let Pokemon;
 let Pokemon2;
+let checkboxs;
 
 let colors = {
     fire: '#FDDFDF',
@@ -47,7 +48,10 @@ let AllSpeed = [];
 
 
 async function loadPokedex() {
+
     checkbox()
+    checkboxs = document.getElementsByClassName('input_filterBox');
+
     for (let i = 1; i < pokemon_number; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
@@ -309,35 +313,53 @@ function checkbox() {
 
 
 
-let typeOR = "fire"||"grass"||"electric";
-let allCheckbox = [];
+
 
 function filterPokemon(type) {
+    //if all checkboxs value are false then show all Pokemons
+    //else show only the pokemons elements where the pokemon type it's equal to checkboxs where there value are true
 
-    let checkbox = document.getElementById(`checkbox-${type}`);
-    let checkboxValue = document.getElementById(`checkbox-${type}`).value;
-    console.log(checkboxValue)
+    // let checkbox = document.getElementById(`checkbox-${type}`);
+    // let checkboxValue = document.getElementById(`checkbox-${type}`).value;
+    // console.log(checkboxValue)
 
-    let checkboxs = document.getElementsByClassName('input_filterBox');
+    let check = false;
+    let checked = [];
+
+    for (let index = 0; index < checkboxs.length; index++) {
+        const element = checkboxs[index];
+        console.log(element.checked + " " + element.value)
+        
+        
+        if (element.checked) {
+            check = true;
+            checked.push(element.value)
+            console.log(check)
+            if(check) break;
+            
+        } else {check = false}
+        
+    }
+
     
-    allCheckbox.push(checkboxs)
+    
     
 
 
-    for (let i = 1; i < pokemon_number; i++) {
+    // for (let i = 1; i < pokemon_number; i++) {
 
-        let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
-        let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
+    //     let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
+    //     let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
         
        
        
-        if (!checkboxs.checked) {
-            pokemonCardElement.classList.remove('d-none')
-        } else { (checkbox.checked && pokemonType != checkboxValue)  
-            pokemonCardElement.classList.add('d-none')
-        }
+    //     if (!checkboxs.checked) {
+    //         pokemonCardElement.classList.remove('d-none')
+    //     } else { (checkbox.checked && pokemonType != checkboxValue)  
+    //         pokemonCardElement.classList.add('d-none')
+    //     }
 
-    }
+    // }
 
 }
 
