@@ -325,7 +325,7 @@ function filterPokemon(type) {
 
     let check = false;
     let checked = [];
-
+    console.log(checked)
     for (let index = 0; index < checkboxs.length; index++) {
         const element = checkboxs[index];
         console.log(element.checked + " " + element.value)
@@ -334,8 +334,7 @@ function filterPokemon(type) {
         if (element.checked) {
             check = true;
             checked.push(element.value)
-            console.log(check)
-            if(check) break;
+            
             
         } else {check = false}
         
@@ -343,23 +342,27 @@ function filterPokemon(type) {
 
     
     
+
+    for (let i = 1; i < pokemon_number; i++) {
+
+        let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
+        let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
     
-
-
-    // for (let i = 1; i < pokemon_number; i++) {
-
-    //     let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
-    //     let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
-        
        
-       
-    //     if (!checkboxs.checked) {
-    //         pokemonCardElement.classList.remove('d-none')
-    //     } else { (checkbox.checked && pokemonType != checkboxValue)  
-    //         pokemonCardElement.classList.add('d-none')
-    //     }
+        if (!check) {
+            for (let t = 0; t < checked.length; t++) {
+                const Type = checked[t];
+                console.log(Type)
+                if (Type != pokemonType) {
+                    pokemonCardElement.classList.add('d-none')
+                }
+            }
+            
+        } else { 
+            pokemonCardElement.classList.remove('d-none')
+        }
 
-    // }
+    }
 
 }
 
