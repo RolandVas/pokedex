@@ -326,6 +326,7 @@ function filterPokemon(type) {
     let check = false;
     let checked = [];
     console.log(checked)
+    console.log(check)
     for (let index = 0; index < checkboxs.length; index++) {
         const element = checkboxs[index];
         console.log(element.checked + " " + element.value)
@@ -333,10 +334,8 @@ function filterPokemon(type) {
         
         if (element.checked) {
             check = true;
-            checked.push(element.value)
-            
-            
-        } else {check = false}
+            checked.push(element.value) 
+        } 
         
     }
 
@@ -347,24 +346,26 @@ function filterPokemon(type) {
 
         let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
         let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
-    
+        
+
        
-        if (!check) {
+        if (check) {
+            pokemonCardElement.classList.add('d-none')
             for (let t = 0; t < checked.length; t++) {
                 const Type = checked[t];
                 console.log(Type)
-                if (Type != pokemonType) {
-                    pokemonCardElement.classList.add('d-none')
+                if (Type == pokemonType) {
+                    pokemonCardElement.classList.remove('d-none')
                 }
             }
             
-        } else { 
-            pokemonCardElement.classList.remove('d-none')
-        }
-
+        } else (pokemonCardElement.classList.remove('d-none'))
     }
 
 }
+
+
+
 
 function searchPokemon() {
 
