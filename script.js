@@ -1,5 +1,10 @@
+// pokemon date from url 1
 let Pokemon;
+
+// pokemon data from url 2
 let Pokemon2;
+
+// all checkboxes
 let checkboxs;
 
 let colors = {
@@ -22,12 +27,14 @@ let colors = {
 
 let type = ['fire', 'grass', 'electric', 'water', 'ground', 'rock', 'fairy', 'poison', 'bug', 'dragon', 'psychic', 'flying', 'fighting', 'normal', 'ghost']
 
+//  Number of Loaded pokemon
+let pokemon_number = 51;
 
-let pokemon_number = 101;
 
 
-
-/* Werte von renderAllPokemonInfoForCard */
+/**
+ * deta from function renderAllPokemonInfoForCard()
+ */
 let AllWeight = [];
 let Allheight = [];
 let AllName = [];
@@ -36,9 +43,12 @@ let AllType = [];
 let AllImg = [];
 let AllHabitat = [];
 let AllAbility1 = [];
-// let AllAbility2 = [];
 
-/* Werte von renderAllPokemonStatForcard() */
+
+
+/**
+ * deta from function renderAllPokemonStatForcard()
+ */
 let AllHP = [];
 let AllAttack = [];
 let AllDefense = [];
@@ -47,6 +57,11 @@ let AllSpec_def = [];
 let AllSpeed = [];
 
 
+
+/**
+ * load date from API 
+ * load Pokedex with all pokemons
+ */
 async function loadPokedex() {
 
     checkbox()
@@ -67,18 +82,20 @@ async function loadPokedex() {
         renderAllPokemonInfoForCard() /* rendert alle daten für die grosse Pokemon Karte // div ist im HTML teil definiert */
         renderAllPokemonStatForcard()
         
-
-
     }
 
 }
 
 
-/* *****************************************rendert alle mini Pokemon Karten***************************** */
+/**
+ * render all mini pokemon cards
+ * 
+ * @param {number} i - number of loaded pokemon cards
+ */
 function renderAllPokemonCardMini(i) {
 
     let name = Pokemon['name'];
-    name = name[0].toUpperCase() + name.slice(1); /*name[0].toUpperCase() -> name als string nulte stelle &&&& slice(1) ab stelle 1 setzt alles zurück  */
+    name = name[0].toUpperCase() + name.slice(1); /*name[0].toUpperCase() -> name als string nulte stelle & slice(1) ab stelle 1 setzt alles zurück  */
 
     let img = Pokemon['sprites']['other']['dream_world']['front_default'];
     let type = Pokemon['types'][0]['type']['name'];
@@ -105,7 +122,9 @@ function renderAllPokemonCardMini(i) {
 
 
 
-/* *****************************************Liest alle about-infos für Pokemons aus und speichert im Array************************************ */
+/**
+ * Reads all abaut infos for Pokemons and stores in array
+ */
 function renderAllPokemonInfoForCard() {
 
     let species = Pokemon2['genera'][7]['genus'];
@@ -124,9 +143,6 @@ function renderAllPokemonInfoForCard() {
     let ability1 = Pokemon['abilities'][0]['ability']['name'];
     AllAbility1.push(ability1)
 
-    // let ability2 = Pokemon['abilities'][1]['ability']['name'];
-    // AllAbility2.push(ability2)
-
     let habitat = Pokemon2['habitat']['name'];
     AllHabitat.push(habitat)
 
@@ -138,7 +154,9 @@ function renderAllPokemonInfoForCard() {
 
 }
 
-/* *****************************************Liest alle stats für Pokemons aus und speichert im Array************************************ */
+/**
+ * Reads all stats for Pokemons and stores in array
+ */
 function renderAllPokemonStatForcard() {
 
     let HP = Pokemon['stats'][0]['base_stat'];
@@ -162,6 +180,11 @@ function renderAllPokemonStatForcard() {
 }
 
 
+/**
+ * load stats for big pokemon card
+ * 
+ * @param {number} i - number of the pokemon card you clicked on
+ */
 function showAllStatForPokemonCard(i) {
 
     let HP = AllHP[i - 1];
@@ -179,7 +202,7 @@ function showAllStatForPokemonCard(i) {
     document.getElementById('speed').innerHTML = speed;
 
 
-    /* ********************Progress Bar width************************* */
+    /* Progress Bar width */
     document.getElementById('HPBar').style.width = `${HP}%`;
     document.getElementById('attackBar').style.width = `${attack}%`;
     document.getElementById('defenseBar').style.width = `${defense}%`;
@@ -195,10 +218,14 @@ function showAllStatForPokemonCard(i) {
 
 
 
-/* ***************************************rendert alle grosse Pokemon Karten************************************** */
+/**
+ * load abaut for big pokemon card
+ * 
+ * @param {number} i - number of the pokemon card you clicked on
+ */
 function showAllInforForPokemonCard(i) {
 
-    let PokemonName = AllName[i - 1]; /* i - 1 weil im Array fängt man von 0 an zu zählen - i ist 1 siehe Zeile 34*/
+    let PokemonName = AllName[i - 1]; /* i - 1 weil im Array fängt man von 0 an zu zählen */
     PokemonName = PokemonName[0].toUpperCase() + PokemonName.slice(1);
 
     let species = AllSpecies[i - 1];
@@ -210,7 +237,6 @@ function showAllInforForPokemonCard(i) {
     let img = AllImg[i - 1];
     let habitat = AllHabitat[i - 1];
     let ability1 = AllAbility1[i - 1];
-    // let ability2 = AllAbility2[i - 1];
 
 
     document.getElementById('pokedexCardName').innerHTML = PokemonName;
@@ -228,8 +254,11 @@ function showAllInforForPokemonCard(i) {
 
 
 
-/* ****************************************öffnet die grosse Pokemon Karte******************************** */
-function openPokemonCard(i) { /* i ist die Nummer von der Karte auf den man geklickt hat*/
+/**
+ * show single pokemon on big card
+ * @param {number} i - number of the pokemon card you clicked on
+ */
+function openPokemonCard(i) { 
     document.getElementById('PokemonCardBody').classList.remove('d-none1');
 
     document.getElementById('statsNav').classList.remove('table-nav-activ')
@@ -239,7 +268,11 @@ function openPokemonCard(i) { /* i ist die Nummer von der Karte auf den man gekl
     showAllStatForPokemonCard(i)/* rendert alle infos für die kleine Karte */
 }
 
-/* ****************************************schliesst die grosse Pokemon Karte******************************** */
+
+
+/**
+ * close single pokemon view
+ */
 function ClosePokemonCard() {
     document.getElementById('PokemonCardBody').classList.add('d-none1');
     document.getElementById('PokemonCardBody').classList.add('d-none1');
@@ -251,7 +284,11 @@ function ClosePokemonCard() {
 
 
 
-/* *************************************************umrechnung für grösse und gewicht************************ */
+/**
+ * calculated height to cm and weight to kg 
+ * @param {number} weight 
+ * @param {number} height
+ */
 function WeightInKg(weight) {
     return weight / 10;
 }
@@ -263,7 +300,9 @@ function HeightInCm(height) {
 
 
 
-
+/**
+ * shows the about of the pokemon
+ */
 function showAbout() {
     document.getElementById('AboutTable').classList.remove('d-none')
     document.getElementById('StatTable').classList.add('d-none')
@@ -274,6 +313,10 @@ function showAbout() {
 }
 
 
+
+/**
+ * shows the stats of the pokemon
+ */
 function showStats() {
     document.getElementById('AboutTable').classList.add('d-none')
     document.getElementById('StatTable').classList.remove('d-none')
@@ -283,6 +326,9 @@ function showStats() {
 }
 
 
+/**
+ * sets colors to dark
+ */
 function darkmode() {
     const dark = document.getElementById('accept');
 
@@ -290,13 +336,19 @@ function darkmode() {
         document.body.style.backgroundColor = "#3d3d3d";
         document.getElementById('navbar').classList.add('darkmode-nav')
         document.getElementById('PokemonCardBottom').classList.add('darkmodeCard')
+        document.getElementById('filterBox').classList.add('darkmode-nav')
     } else {
         document.body.style.backgroundColor = "";
         document.getElementById('navbar').classList.remove('darkmode-nav')
         document.getElementById('PokemonCardBottom').classList.remove('darkmodeCard')
+        document.getElementById('filterBox').classList.remove('darkmode-nav')
     }
 }
 
+
+/**
+ * render all checkboxes for filtering by type
+ */
 function checkbox() {
     for (let i = 0; i < type.length; i++) {
         const pokemonType = type[i];
@@ -314,14 +366,10 @@ function checkbox() {
 
 
 
-
-function filterPokemon(type) {
-    //if all checkboxs value are false then show all Pokemons
-    //else show only the pokemons elements where the pokemon type it's equal to checkboxs where there value are true
-
-    // let checkbox = document.getElementById(`checkbox-${type}`);
-    // let checkboxValue = document.getElementById(`checkbox-${type}`).value;
-    // console.log(checkboxValue)
+/**
+ * Filters poekemon by type
+ */
+function filterPokemon() {
 
     let check = false;
     let checked = [];
@@ -366,7 +414,9 @@ function filterPokemon(type) {
 
 
 
-
+/**
+ * Search pokemon by name
+ */
 function searchPokemon() {
 
     const input = document.getElementById("search").value;
@@ -394,39 +444,3 @@ function searchPokemon() {
     }
 
 }
-
-
-
-// let darkmode = document.getElementById('darkmode');
-
-// if (darkmode.checked = true) {
-//     document.getElementById('allPokemon').classList.add('darkmode')
-// }
-
-
-
-
-
-
-
-
-// if (checkbox.checked && pokemonType != checkboxValue) {
-        //     pokemonCardElement.classList.add('d-none')
-        // } else (pokemonCardElement.classList.remove('d-none'))
-
-
-
- // if (checkbox.checked){
-    //     allCheckbox.push(`checkbox-${type}`)
-    // } else (allCheckbox.splice (0, 1))
-
-
-
-
-
-
-
-
-
-
-

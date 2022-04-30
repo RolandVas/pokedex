@@ -15,13 +15,32 @@ body {
     background-color: #666666;
 }
 
+.padding {
+    padding: 16px;
+}
+
+.min_w {
+    min-width: 100% !important;
+}
+
+
+.input_filterBox{
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.d-flex {
+    margin-right: 30px;
+}
 /* -----------------head---------------- */
 
 .filter {
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
-    height: 100%;
+    justify-content: center;
+    min-width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .filterBox {
@@ -57,7 +76,6 @@ body {
 .pokemon-card-name-mini {
     font-size: 1.8rem;
     font-weight: bold;
-    /* color: #484349; */
     color: #4C5B5C;
     margin-bottom: 16px;
 }
@@ -82,6 +100,8 @@ body {
 
 }
 
+
+
 /* load pokemon */
 
 .pokemon-number {
@@ -96,7 +116,8 @@ body {
 }
 
 
-/*-------------------------- Pokemon card body------------------------------ */
+
+/* Pokemon card body */
 
 .bg-1 {
     display: flex;
@@ -197,7 +218,7 @@ body {
 
 
 
-/* -----------------------Pokemon Info------------------- */
+/* Pokemon Info */
 
 .bi-arrow-left {
     cursor: pointer;
@@ -233,4 +254,36 @@ tr :first-child {
 
 tr :last-child {
     text-align: end;
+}
+
+
+
+
+
+
+
+
+
+
+.phone_nav {
+    display: flex;
+}
+@media(max-width: 620px) {
+
+
+    .container-fluid {
+        flex-direction: column;
+
+    }
+}
+
+
+@media(max-width: 400px) {
+
+    .phone_nav {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
 }

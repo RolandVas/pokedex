@@ -15,45 +15,43 @@
 <body onload="loadPokedex()">
 
 
+    <!-- Header -->
     <nav class="navbar navbar-light bg-light">
         <div id="navbar" class="container-fluid">
             <a class="navbar-brand">Pokedex</a>
 
-            <div class="filter" id="filterBox">
+            <div class="phone_nav">
+
+                <div class="d-flex padding">
+                    <input id="search" onkeyup="searchPokemon()" class="form-control me-2 min_w"
+                        placeholder="Search Pokemon" aria-label="Search">
+                </div>
+
+                <div class="form-check form-switch padding">
+                    <input onclick="darkmode()" class="form-check-input" name="accept" type="checkbox" id="accept">
+                    <label class="form-check-label" for="accept">Darkmode</label>
+                </div>
+
             </div>
 
-            <div class="d-flex">
-                <input id="search" onkeyup="searchPokemon()" class="form-control me-2" type="search"
-                    placeholder="Search Pokemon" aria-label="Search">
-            </div>
-            
-            <div class="form-check form-switch">
-                <input onclick="darkmode()" class="form-check-input" name="accept" type="checkbox" id="accept">
-                <label class="form-check-label" for="accept">Darkmode</label>
-              </div>
+        </div>
+        <div class="filter" id="filterBox">
         </div>
     </nav>
 
+    <!-- Load all Pokemon card mini -->
     <div class="load-pokemon" id="allPokemon">
 
     </div>
 
-    <div class="load-pokemon" id="result">
-
-    </div>
 
 
 
 
-
-
-
-
-    <!-- -----------------------------Pokemon Card------------------------- -->
+    <!-- Single Pokemon card view -->
     <div class="bg-1 d-none1" id="PokemonCardBody" onclick="ClosePokemonCard()">
-        <div class="Pokemon-card-body" onclick="event.stopPropagation()">
-            <!-- verhindert das onclick="ClosePokemonCard()" funktion auf der Pokemon-card-body div -->
-
+        <div class="Pokemon-card-body" onclick="event.stopPropagation()"> <!-- verhindert das onclick="ClosePokemonCard()" funktion auf der Pokemon-card-body div -->
+            
             <div class="pokemon-card-top" id="pokedex-card">
                 <svg onclick="ClosePokemonCard()" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                     fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
