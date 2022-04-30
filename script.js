@@ -30,8 +30,6 @@ let type = ['fire', 'grass', 'electric', 'water', 'ground', 'rock', 'fairy', 'po
 //  Number of Loaded pokemon
 let pokemon_number = 51;
 
-
-
 /**
  * deta from function renderAllPokemonInfoForCard()
  */
@@ -43,8 +41,6 @@ let AllType = [];
 let AllImg = [];
 let AllHabitat = [];
 let AllAbility1 = [];
-
-
 
 /**
  * deta from function renderAllPokemonStatForcard()
@@ -63,7 +59,6 @@ let AllSpeed = [];
  * load Pokedex with all pokemons
  */
 async function loadPokedex() {
-
     checkbox()
     checkboxs = document.getElementsByClassName('input_filterBox');
 
@@ -72,18 +67,14 @@ async function loadPokedex() {
         let response = await fetch(url);
         Pokemon = await response.json();
 
-
         let url2 = `https://pokeapi.co/api/v2/pokemon-species/${i}`;
         let response2 = await fetch(url2);
         Pokemon2 = await response2.json();
 
-
         renderAllPokemonCardMini(i) /* rendert alle daten für die kleine Pokemon Karte // div ist im JavaScript definiert */
         renderAllPokemonInfoForCard() /* rendert alle daten für die grosse Pokemon Karte // div ist im HTML teil definiert */
-        renderAllPokemonStatForcard()
-        
+        renderAllPokemonStatForcard() 
     }
-
 }
 
 
@@ -100,25 +91,10 @@ function renderAllPokemonCardMini(i) {
     let img = Pokemon['sprites']['other']['dream_world']['front_default'];
     let type = Pokemon['types'][0]['type']['name'];
 
-
-    document.getElementById('allPokemon').innerHTML += `
-    <div onclick="openPokemonCard(${i})" id="CardMiniColor${i}" class="pokemon-card-mini">
-        <div>
-            <div class="pokemon-number">#${i}</div>
-            <div id="pokemonNameMini${i}" class="pokemon-card-name-mini">${name}</div>
-            <span id="pokemonTypeMini${i}" class="pokemon-card-type">${type}</span>
-        </div>
-        <div class="pokemon-card-img-mini">
-            <img id="pokedexCardImgMini" src="${img}" alt="">
-        </div>
-    </div>
-    `;
+    document.getElementById('allPokemon').innerHTML += allPokemonCardMiniTemplate(i, img, type, name);
 
     document.getElementById(`CardMiniColor${i}`).style.backgroundColor = colors[type];
-
-
 }
-
 
 
 
@@ -151,8 +127,9 @@ function renderAllPokemonInfoForCard() {
 
     let pokemonName = Pokemon['name'];
     AllName.push(pokemonName)
-
 }
+
+
 
 /**
  * Reads all stats for Pokemons and stores in array
@@ -180,6 +157,7 @@ function renderAllPokemonStatForcard() {
 }
 
 
+
 /**
  * load stats for big pokemon card
  * 
@@ -201,7 +179,6 @@ function showAllStatForPokemonCard(i) {
     document.getElementById('spec-def').innerHTML = spec_def;
     document.getElementById('speed').innerHTML = speed;
 
-
     /* Progress Bar width */
     document.getElementById('HPBar').style.width = `${HP}%`;
     document.getElementById('attackBar').style.width = `${attack}%`;
@@ -210,11 +187,8 @@ function showAllStatForPokemonCard(i) {
     document.getElementById('specDefBar').style.width = `${spec_def}%`;
     document.getElementById('speedBar').style.width = `${speed}%`;
 
-
     document.getElementById('pokemonNumber').innerHTML = `#${i}`;
-
 }
-
 
 
 
@@ -238,7 +212,6 @@ function showAllInforForPokemonCard(i) {
     let habitat = AllHabitat[i - 1];
     let ability1 = AllAbility1[i - 1];
 
-
     document.getElementById('pokedexCardName').innerHTML = PokemonName;
     document.getElementById('pokedexCardSpecies').innerHTML = species;
     document.getElementById('pokemonCardTyp').innerHTML = type;
@@ -249,7 +222,6 @@ function showAllInforForPokemonCard(i) {
     document.getElementById('pokedexCardAbilities').innerHTML = ability1;
 
     document.getElementById('pokedex-card').style.backgroundColor = colors[type];
-
 }
 
 
@@ -282,8 +254,6 @@ function ClosePokemonCard() {
 
 
 
-
-
 /**
  * calculated height to cm and weight to kg 
  * @param {number} weight 
@@ -299,7 +269,6 @@ function HeightInCm(height) {
 
 
 
-
 /**
  * shows the about of the pokemon
  */
@@ -309,7 +278,6 @@ function showAbout() {
 
     document.getElementById('statsNav').classList.remove('table-nav-activ')
     document.getElementById('aboutNav').classList.add('table-nav-activ')
-
 }
 
 
@@ -353,17 +321,9 @@ function checkbox() {
     for (let i = 0; i < type.length; i++) {
         const pokemonType = type[i];
 
-        document.getElementById('filterBox').innerHTML += `
-            <div class="filterBox">
-                <input class="input_filterBox" onclick="filterPokemon('${pokemonType}')" type="checkbox" id="checkbox-${pokemonType}" value="${pokemonType}">
-                <label class="label" for="checkbox-${pokemonType}">${pokemonType}</label>
-            </div>
-        `;
+        document.getElementById('filterBox').innerHTML += checkboxTemplate(pokemonType);
     }
 }
-
-
-
 
 
 /**
@@ -373,45 +333,29 @@ function filterPokemon() {
 
     let check = false;
     let checked = [];
-    console.log(checked)
-    console.log(check)
+
     for (let index = 0; index < checkboxs.length; index++) {
         const element = checkboxs[index];
-        console.log(element.checked + " " + element.value)
-        
-        
         if (element.checked) {
             check = true;
             checked.push(element.value) 
-        } 
-        
+        }  
     }
 
-    
-    
-
     for (let i = 1; i < pokemon_number; i++) {
-
         let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
         let pokemonType = document.getElementById(`pokemonTypeMini${i}`).innerHTML;
-        
-
-       
         if (check) {
             pokemonCardElement.classList.add('d-none')
             for (let t = 0; t < checked.length; t++) {
                 const Type = checked[t];
-                console.log(Type)
                 if (Type == pokemonType) {
                     pokemonCardElement.classList.remove('d-none')
                 }
             }
-            
         } else (pokemonCardElement.classList.remove('d-none'))
     }
-
 }
-
 
 
 /**
@@ -422,10 +366,7 @@ function searchPokemon() {
     const input = document.getElementById("search").value;
     console.log(input)
 
-
-
     for (let i = 1; i < pokemon_number; i++) {
-
         let pokemonCardElement = document.getElementById(`CardMiniColor${i}`);
         console.log(pokemonCardElement)
 
